@@ -1,19 +1,14 @@
 {
-  "name": "@ideadope/humanizer",
-  "private": false,
-  "description": "WebAssembly-powered text humanization",
+  "name": "@ideadope/humanizer-root",
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
-    "test": "npm test --workspaces --if-present",
-    "clean": "rm -rf packages/*/dist apps/*/node_modules",
-    "rebuild": "npm run clean && npm run build"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/node": "^20.0.0"
+    "clean": "rm -rf packages/core/dist packages/humanizer-wasm/dist",
+    "build:wasm": "mkdir -p packages/humanizer-wasm/dist && tinygo build -o packages/humanizer-wasm/dist/humanizer.wasm -target wasm -no-debug ./packages/core/src/main.go",
+    "build:core": "npm run build --workspace=@ideadope/humanizer",
+    "copy:glue": "cp packages/core/src/wasm_exec.js packages/humanizer-wasm/dist/wasm_exec.js",
+    "build": "npm run clean && npm run build:wasm && npm run build:core && npm run copy:glue"
   }
 }

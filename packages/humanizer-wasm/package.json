@@ -1,0 +1,11 @@
+{
+  "name": "@ideadope/humanizer-wasm",
+  "version": "1.0.0",
+  "description": "WebAssembly binary engine for text humanization",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
