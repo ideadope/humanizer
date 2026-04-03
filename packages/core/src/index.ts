@@ -45,7 +45,16 @@ export async function loadHumanizer(wasmSource: string = DEFAULT_WASM_URL) {
       wasmBuffer = fs.readFileSync(wasmSource);
     }
 
-    const instance = await WebAssembly.instantiate(wasmBuffer, go.importObject);
+    const result = await WebAssembly.instantiate(wasmBuffer, go.importObject);
+    // FIX: Handle the difference in return types
+    // instantiate with a buffer returns { instance, module }
+    const instance = (result as any).instance || result;
+
+    if (!instance || !instance.exports) {
+      throw new Error("Wasm instantiation failed: exports not found.");
+    }
+
+    // Start the Go runtime
     go.run(instance);
   }
 

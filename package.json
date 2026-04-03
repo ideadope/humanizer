@@ -9,6 +9,7 @@
     "build:wasm": "mkdir -p packages/humanizer-wasm/dist && tinygo build -o packages/humanizer-wasm/dist/humanizer.wasm -target wasm -no-debug ./packages/core/src/main.go",
     "build:core": "npm run build --workspace=@ideadope/humanizer",
     "copy:glue": "cp packages/core/src/wasm_exec.js packages/humanizer-wasm/dist/wasm_exec.js",
-    "build": "npm run clean && npm run build:wasm && npm run build:core && npm run copy:glue"
+    "build": "npm run clean && npm run build:wasm && npm run build:core && npm run copy:glue",
+    "ship": "npm run build && npm version patch --workspaces && npm publish --workspaces --access public && git push origin main --tags"
   }
 }
