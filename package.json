@@ -1,0 +1,19 @@
+{
+  "name": "@ideadope/humanizer",
+  "private": true,
+  "description": "WebAssembly-powered text humanization",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm test --workspaces --if-present",
+    "clean": "rm -rf packages/*/dist apps/*/node_modules",
+    "rebuild": "npm run clean && npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

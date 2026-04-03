@@ -1,0 +1,24 @@
+{
+  "name": "@ideadope/humanizer",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:wasm": "tinygo build -o dist/humanizer.wasm -target wasm ./src/main.go",
+    "build:ts": "tsc -p ./tsconfig.json",
+    "copy:glue": "cp src/wasm_exec.js dist/wasm_exec.js",
+    "build": "npm run clean && mkdir -p dist && npm run build:wasm && npm run build:ts && npm run copy:glue"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2"
+  }
+}

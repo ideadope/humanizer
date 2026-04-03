@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "tsx index.ts"
+  },
+  "dependencies": {
+    "@ideadope/humanizer": "*"
+  }
+}
