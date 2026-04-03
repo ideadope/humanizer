@@ -10,6 +10,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ideadope/humanizer.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/ideadope/humanizer/issues"
+  },
+  "homepage": "https://github.com/ideadope/humanizer#readme",
   "scripts": {
     "clean": "rm -rf dist",
     "build:wasm": "tinygo build -o dist/humanizer.wasm -target wasm ./src/main.go",

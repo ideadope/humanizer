@@ -1,6 +1,6 @@
 {
   "name": "@ideadope/humanizer",
-  "private": true,
+  "private": false,
   "description": "WebAssembly-powered text humanization",
   "workspaces": [
     "packages/*",
