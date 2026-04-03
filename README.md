@@ -1,23 +1,50 @@
 ## humanizer
+
 a go webassembly(wasm) port for filtering out hidden hexcodes from text
 
 > [!NOTE]
 > the package is in its early development, be causious!
 
-## usage
+## installation
+
+install the lightweight
 
 ```bash
-npm install @ideadope/humanizer
+npm install @ideadope/humanizer // installs the pure ts library
+```
+
+download the binary from cdn
+
+```bash
+https://unpkg.com/@ideadope/humanizer-wasm@1.0.0/dist/humanizer.wasm
 ```
 
 ```typescript
-import { loadHumanizer } from "@ideadope/humanizer"
+import { loadHumanizer } from "@ideadope/humanizer";
 
-const humanized = await loadHumanizer("hello\u200B world")
-console.log(humanized) // logs: hello world
+const humanize = await loadHumanizer("path-to-wasm-binary");
+
+const output = humanize("hello\u200B world");
+console.log(output); // logs: hello world
+```
+
+or install full-fledged library with wasm binary included
+
+```bash
+npm install @ideadope/humanizer-wasm
+```
+
+```typescript
+import { loadHumanizer } from "@ideadope/humanizer-wasm";
+
+const humanize = await loadHumanizer();
+
+const output = humanize("hello\u200B world");
+console.log(output); // logs: hello world
 ```
 
 ## project structure
+
 ```
 humanizer/
 ├── apps/
