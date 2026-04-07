@@ -1,22 +1,20 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "clean": {
-      "cache": false
-    },
     "build:wasm": {
       "inputs": ["src/**/*.go"],
-      "outputs": ["../humanizer-wasm/dist/**"],
+      "outputs": ["dist/humanizer.wasm"],
       "cache": true
     },
     "build:core": {
-      "dependsOn": ["^build", "build:wasm"],
-      "inputs": ["src/**/*.ts"],
+      "dependsOn": ["build:wasm"],
+      "inputs": ["src/**/*.ts", "src/wasm_exec.js"],
       "outputs": ["dist/**"],
       "cache": true
     },
     "build": {
-      "dependsOn": ["build:wasm", "build:core"]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     }
   }
 }

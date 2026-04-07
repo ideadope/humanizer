@@ -1,20 +1,29 @@
+import { useState } from 'react';
 import './App.css'
-import { loadHumanizer } from '@ideadope/humanizer'
+import { loadHumanizer, humanizer } from '@ideadope/humanizer'
+
 function App() {
+  const [loading, setLoading] = useState(false);
 
   return (
-    <>
-      hi
-      <button onClick={async () => {
-        const humanizer = await loadHumanizer()
-
-        const cleaned = humanizer.humanize("This is a robotic sentence\u200B created by an AI.")
-
-        console.log(cleaned);
-        
-      }}>load</button>
-    </>
-  )
+    <button
+      disabled={loading}
+      onClick={async () => {
+        setLoading(true);
+        try {
+          await loadHumanizer();
+          const cleaned = humanizer.humanize("...");
+          console.log(cleaned);
+        } catch (err) {
+          console.error("error", err)
+        } finally {
+          setLoading(false);
+        }
+      }}
+    >
+      {loading ? "Initializing..." : "Load"}
+    </button>
+  );
 }
 
 export default App

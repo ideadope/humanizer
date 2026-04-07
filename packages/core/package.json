@@ -9,12 +9,19 @@
     "dist/index.d.ts",
     "dist/wasm_exec.js"
   ],
-"scripts": {
-  "clean": "rm -rf dist",
-  "build:wasm": "mkdir -p ../humanizer-wasm/dist && tinygo build -o ../humanizer-wasm/dist/humanizer.wasm -target wasm -no-debug ./src/main.go && cp src/wasm_exec.js ../humanizer-wasm/dist/wasm_exec.js",
-  "build:core": "pnpm run clean && tsc -p ./tsconfig.json && cp src/wasm_exec.js dist/wasm_exec.js",
-  "build": "turbo run build" 
-},
+  "exports": {
+    ".": "./dist/index.js",
+    "./wasm_exec": "./dist/wasm_exec.js"
+  },
+  "sideEffects": [
+    "./dist/wasm_exec.js"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:wasm": "tinygo build -o dist/humanizer.wasm -target wasm -no-debug src/main.go",
+    "build:core": "tsc -p ./tsconfig.json && cp src/wasm_exec.js dist/wasm_exec.js",
+    "build": "pnpm run clean && pnpm run build:wasm && pnpm run build:core"
+  },
   "devDependencies": {
     "@types/node": "^25.5.2"
   }
