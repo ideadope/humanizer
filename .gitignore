@@ -18,3 +18,5 @@ Thumbs.db
 
 # Go Specific
 go.sum
+
+.turbo
